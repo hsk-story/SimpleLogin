@@ -33,7 +33,7 @@ public class ClientCommandHandler {
     public static void onOpenGui(GuiScreenEvent.InitGuiEvent event) {
         if (event.getGui() instanceof ChatScreen && !active) {
             active = true;
-            Minecraft.getInstance().player.connection.func_195515_i().register(
+            Minecraft.getInstance().player.connection.getCommandDispatcher().register(
                     LiteralArgumentBuilder.<ISuggestionProvider>literal("sl_changepassword").then(
                             LiteralArgumentBuilder.<ISuggestionProvider>literal(SLConfig.CLIENT.password.get()).requires((s) -> true)
                     )

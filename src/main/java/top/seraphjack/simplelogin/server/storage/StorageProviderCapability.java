@@ -2,7 +2,6 @@ package top.seraphjack.simplelogin.server.storage;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.world.GameType;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.mindrot.jbcrypt.BCrypt;
@@ -18,12 +17,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 
+import static net.minecraft.world.World.OVERWORLD;
+
 @ThreadSafe
 @OnlyIn(Dist.DEDICATED_SERVER)
 public class StorageProviderCapability implements StorageProvider {
     @Nonnull
     private IRegisteredPlayers registeredPlayers = Objects.requireNonNull(
-            SLConstants.server.getWorld(DimensionType.OVERWORLD)
+            SLConstants.server.getWorld(OVERWORLD)
                     .getCapability(CapabilityLoader.CAPABILITY_REGISTERED_PLAYERS, null)).orElseThrow(RuntimeException::new);
 
     @Override

@@ -4,6 +4,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.GameType;
+import net.minecraft.world.storage.IWorldInfo;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -128,7 +129,7 @@ public class PlayerLoginHandler {
 
     public void playerLeave(ServerPlayerEntity player) {
         final String username = player.getGameProfile().getName();
-        final Position pos = new Position(player.func_226277_ct_(), player.func_226278_cu_(), player.func_226281_cx_());
+        final Position pos = new Position(player.getPosX(), player.getPosY(), player.getPosZ());
 
         // Save player position in storage
         if (!isPlayerInLoginList(username)) {
@@ -138,8 +139,8 @@ public class PlayerLoginHandler {
         // Teleport player to spawn point
         if (SLConfig.SERVER.protectPlayerCoord.get()) {
             try {
-                BlockPos spawnPoint = player.world.getSpawnPoint();
-                player.setPosition(spawnPoint.getX(), spawnPoint.getY(), spawnPoint.getZ());
+                IWorldInfo spawnPoint = player.world.getWorldInfo();
+                player.setPosition(spawnPoint.getSpawnX(), spawnPoint.getSpawnY(), spawnPoint.getSpawnZ());
             } catch (Exception ex) {
                 SimpleLogin.logger.error("Fail to set player position to spawn point when logging out.", ex);
             }
@@ -175,9 +176,9 @@ public class PlayerLoginHandler {
         Login(ServerPlayerEntity player) {
             this.name = player.getGameProfile().getName();
             this.time = System.currentTimeMillis();
-            this.posX = player.func_226277_ct_();
-            this.posY = player.func_226278_cu_();
-            this.posZ = player.func_226281_cx_();
+            this.posX = player.getPosX();
+            this.posY = player.getPosY();
+            this.posZ = player.getPosZ();
             this.yaw = player.rotationYaw;
             this.pitch = player.rotationPitch;
             this.lastRequested = System.currentTimeMillis();

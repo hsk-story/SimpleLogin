@@ -1,6 +1,7 @@
 package top.seraphjack.simplelogin.server;
 
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
@@ -31,8 +32,14 @@ public final class ServerLoader {
 
         SLStorage.initialize(SLConfig.SERVER.storageMethod.get());
 
-        SLCommand.register(e.getCommandDispatcher());
     }
+
+
+    @SubscribeEvent
+    public static void serverCommand(RegisterCommandsEvent e) {
+        SLCommand.register(e.getDispatcher());
+    }
+
 
     @SubscribeEvent
     public static void serverStopping(FMLServerStoppingEvent e) throws IOException {

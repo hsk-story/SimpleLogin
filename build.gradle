@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = 'https://maven.covertdragon.team/repository/internal/' }
         maven { url = 'https://maven.aliyun.com/central/' }
         maven { url = 'https://maven.aliyun.com/repository/public/' }
@@ -10,7 +11,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 
-version = '0.0.0-alpha-mc1.15'
+version = '0.0.0-alpha-mc1.16'
 group = 'top.seraphjack.simplelogin'
 archivesBaseName = 'simplelogin'
 
@@ -21,7 +22,7 @@ if (System.getenv().BUILD_NUMBER != null) {
 }
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190719-1.14.3'
+    mappings channel: 'snapshot', version: '20201028-1.16.3'
     runs {
         client {
             workingDirectory project.file('run')
@@ -78,7 +79,7 @@ configurations {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.1'
+    minecraft 'net.minecraftforge:forge:1.16.4-35.1.4'
 
     shade 'org.mindrot:jbcrypt:0.4'
 }

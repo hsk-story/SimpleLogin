@@ -1,11 +1,11 @@
 package top.seraphjack.simplelogin.server.capability;
 
+import net.minecraft.client.world.DimensionRenderInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.OverworldDimension;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
@@ -52,10 +52,10 @@ public class CapabilityLoader {
 
     @SubscribeEvent
     public static void onAttachCapabilitiesWorld(AttachCapabilitiesEvent<World> event) {
-        if (event.getObject().dimension instanceof OverworldDimension) {
+/*        if (event.getObject().dimension instanceof DimensionRenderInfo.Overworld) {
             event.addCapability(new ResourceLocation(SLConstants.MODID, "sl_registered_players"),
                     new CapabilityRegisteredPlayers.Provider());
-        }
+        }*/
     }
 
     @SubscribeEvent

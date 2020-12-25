@@ -31,9 +31,9 @@ public class MessageChangePassword {
         String username = Objects.requireNonNull(ctx.get().getSender()).getGameProfile().getName();
         if (SLStorage.instance().storageProvider.checkPassword(username, msg.original)) {
             SLStorage.instance().storageProvider.changePassword(username, msg.to);
-            Objects.requireNonNull(ctx.get().getSender()).sendMessage(new StringTextComponent("Password changed successfully."));
+            Objects.requireNonNull(ctx.get().getSender()).sendMessage(new StringTextComponent("Password changed successfully."), ctx.get().getSender().getUniqueID());
         } else {
-            Objects.requireNonNull(ctx.get().getSender()).sendMessage(new StringTextComponent("Wrong original password."));
+            Objects.requireNonNull(ctx.get().getSender()).sendMessage(new StringTextComponent("Wrong original password."), ctx.get().getSender().getUniqueID());
             SimpleLogin.logger.warn("Player " + username + " tried to change password with a wrong password.");
         }
         ctx.get().setPacketHandled(true);
